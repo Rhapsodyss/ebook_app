@@ -113,7 +113,7 @@
                 <input
                     type="text"
                     name="keyword"
-                    placeholder="Cari judul, penulis..."
+                    placeholder="Cari judul..."
                     value="<?= htmlspecialchars($keyword ?? '') ?>"
                     class="bg-transparent text-base text-white w-full md:w-64 placeholder-white/50 focus:outline-none">
             </form>
