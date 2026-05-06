@@ -60,19 +60,59 @@ class Admin extends BaseController
     }
 
     public function update($id)
-    {
-        $model = new \App\Models\StoryModel();
+{
+    $model = new \App\Models\StoryModel();
 
-        $model->update($id, [
-            'title' => $this->request->getPost('title'),
-            'author' => $this->request->getPost('author'),
-            'description' => $this->request->getPost('description'),
-            'story_detail' => $this->request->getPost('story_detail'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
+    $story = $model->find($id);
 
+    if (!$story) {
         return redirect()->to('/admin');
     }
+
+    $data = [
+        'title' => $this->request->getPost('title'),
+        'author' => $this->request->getPost('author'),
+        'description' => $this->request->getPost('description'),
+        'story_detail' => $this->request->getPost('story_detail'),
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+
+    // IMAGE
+    $image = $this->request->getFile('image');
+
+    if ($image && $image->isValid() && !$image->hasMoved()) {
+
+        $imageName = $image->getRandomName();
+        $image->move('uploads/', $imageName);
+
+        // hapus gambar lama
+        if (!empty($story['image']) && file_exists('uploads/' . $story['image'])) {
+            unlink('uploads/' . $story['image']);
+        }
+
+        $data['image'] = $imageName;
+    }
+
+    // BACKGROUND IMAGE
+    $bg = $this->request->getFile('background_image');
+
+    if ($bg && $bg->isValid() && !$bg->hasMoved()) {
+
+        $bgName = $bg->getRandomName();
+        $bg->move('uploads/', $bgName);
+
+        // hapus background lama
+        if (!empty($story['background_image']) && file_exists('uploads/' . $story['background_image'])) {
+            unlink('uploads/' . $story['background_image']);
+        }
+
+        $data['background_image'] = $bgName;
+    }
+
+    $model->update($id, $data);
+
+    return redirect()->to('/admin');
+}
 
     public function delete($id)
     {
