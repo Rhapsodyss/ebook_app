@@ -1,40 +1,101 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><?= $story['title']; ?></title>
+read.php
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+```<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($story['title']) ?> — Light's On</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#F5F0E8',
+                        ink: '#1A1A1A',
+                        amber: '#C9943A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'DM Sans', sans-serif; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-up { animation: fadeUp 0.7s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .delay-2 { animation-delay: 0.25s; opacity: 0; }
+        .delay-3 { animation-delay: 0.4s; opacity: 0; }
+    </style>
 </head>
 
-<body class="bg-light">
+<body class="bg-ink text-cream min-h-screen">
 
-<div class="container mt-4">
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-ink/80 backdrop-blur-sm border-b border-white/10">
+    <a href="/" class="font-display text-xl font-bold tracking-tight text-cream hover:text-amber transition-colors">
+        💡 Light's on
+    </a>
+    <a href="/" class="text-sm text-white/50 hover:text-amber transition-colors flex items-center gap-1">
+        ← Kembali
+    </a>
+</nav>
 
-    <!-- 🔵 HEADER -->
-    <div class="card bg-primary text-white p-4 mb-4 shadow-sm">
-        <h2><?= $story['title']; ?></h2>
-        <p class="mb-1">Written by <strong><?= $story['author']; ?></strong></p>
-        <small>
-            Published on <?= date('j/n/Y', strtotime($story['created_at'])); ?>
-        </small>
+
+<main class="max-w-2xl mx-auto px-6 pt-28 pb-20">
+
+    <!-- META -->
+    <div class="fade-up mb-3">
+        <p class="text-amber text-xs uppercase tracking-[0.25em]">✦ Cerita</p>
     </div>
 
-    <!-- 🖼️ GAMBAR -->
-    <div class="mb-3">
-        <img src="/uploads/<?= $story['image']; ?>" 
-     class="img-fluid rounded d-block mx-auto shadow-sm " 
-     style="max-width: 400px;">
+    <h1 class="fade-up delay-1 font-display text-4xl md:text-5xl font-black leading-tight mb-4">
+        <?= htmlspecialchars($story['title']) ?>
+    </h1>
+
+    <div class="fade-up delay-1 flex items-center gap-3 text-white/40 text-sm mb-10 pb-6 border-b border-white/10">
+        <span>by <span class="text-cream/70 font-medium"><?= htmlspecialchars($story['author']) ?></span></span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span><?= date('j F Y', strtotime($story['created_at'])) ?></span>
     </div>
 
-    <!-- 📖 ISI CERITA -->
-    <div class="card shadow-sm p-4">
-        <p style="white-space: pre-line;">
-            <?= $story['story_detail']; ?>
-        </p>
+    <!-- COVER IMAGE -->
+    <div class="fade-up delay-2 mb-10">
+        <div class="rounded-xl overflow-hidden shadow-2xl shadow-black/60 ring-1 ring-white/10 max-w-xs mx-auto">
+            <img
+                src="/uploads/<?= htmlspecialchars($story['image']) ?>"
+                alt="<?= htmlspecialchars($story['title']) ?>"
+                class="w-full object-cover"
+            >
+        </div>
     </div>
 
-</div>
+    <!-- ISI CERITA -->
+    <article class="fade-up delay-3 text-cream/80 text-base leading-8 whitespace-pre-line font-body">
+        <?= htmlspecialchars($story['story_detail']) ?>
+    </article>
+
+    <!-- FOOTER STORY -->
+    <div class="mt-16 pt-8 border-t border-white/10 flex items-center justify-between">
+        <span class="text-white/30 text-xs uppercase tracking-widest">— Tamat —</span>
+        <a href="/" class="text-amber text-sm hover:underline">Baca cerita lain →</a>
+    </div>
+
+</main>
+
+<footer class="border-t border-white/10 px-8 py-6 text-center text-white/30 text-xs">
+    © <?= date('Y') ?> Light's on — Read more, feel more.
+</footer>
 
 </body>
-</html>
+</html>```
