@@ -36,6 +36,8 @@
             overflow: hidden;
         }
 
+        .card-book img { width: 100%; }
+
         .navbar-custom {
             position: absolute;
             width: 100%;
