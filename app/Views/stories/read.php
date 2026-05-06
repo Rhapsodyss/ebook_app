@@ -48,6 +48,7 @@ $currentContent = $pages[$currentPage - 1];
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,6 +86,7 @@ $currentContent = $pages[$currentPage - 1];
                 opacity: 0;
                 transform: translateY(24px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -114,133 +116,158 @@ $currentContent = $pages[$currentPage - 1];
 
 <body class="bg-ink text-cream min-h-screen">
 
-<!-- NAVBAR -->
-<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 bg-ink/80 backdrop-blur-sm border-b border-white/10">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-ink/80 backdrop-blur-sm border-b border-white/10">
 
-    <a href="/" class="font-display text-xl font-bold tracking-tight text-cream hover:text-amber transition-colors">
-        💡 Light's on
-    </a>
+        <div class="max-w-7xl mx-auto px-3 py-4 flex items-center justify-between">
 
-    <a href="/" class="text-sm text-white/50 hover:text-amber transition-colors flex items-center gap-1">
-        ← Kembali
-    </a>
+            <a href="/" class="font-display text-xl md:text-2xl font-bold tracking-tight text-cream hover:text-amber transition-colors">
+                💡 Light's on
+            </a>
 
-</nav>
+            <a href="/" class="text-sm text-white/50 hover:text-amber transition-colors flex items-center gap-2">
+                <span class="text-lg leading-none">←</span>
+                <span class="hidden sm:inline">Kembali</span>
+            </a>
 
-<main class="max-w-2xl mx-auto px-6 pt-28 pb-20">
+        </div>
 
-    <!-- META -->
-    <div class="fade-up mb-3">
-        <p class="text-amber text-xs uppercase tracking-[0.25em]">
-            ✦ Cerita
-        </p>
-    </div>
+    </nav>
 
-    <!-- TITLE -->
-    <h1 class="fade-up delay-1 font-display text-4xl md:text-5xl font-black leading-tight mb-4">
-        <?= htmlspecialchars($story['title']) ?>
-    </h1>
+    <main class="max-w-2xl mx-auto px-6 pt-28 pb-20">
 
-    <!-- AUTHOR -->
-    <div class="fade-up delay-1 flex items-center gap-3 text-white/40 text-sm mb-10 pb-6 border-b border-white/10">
+        <!-- META -->
+        <div class="fade-up mb-3">
+            <p class="text-amber text-xs uppercase tracking-[0.25em]">
+                ✦ Buku
+            </p>
+        </div>
 
-        <span>
-            by
-            <span class="text-cream/70 font-medium">
-                <?= htmlspecialchars($story['author']) ?>
+        <!-- TITLE -->
+        <h1 class="fade-up delay-1 font-display text-4xl md:text-5xl font-black leading-tight mb-4">
+            <?= htmlspecialchars($story['title']) ?>
+        </h1>
+
+        <!-- AUTHOR -->
+        <div class="fade-up delay-1 flex items-center gap-3 text-white/40 text-sm mb-10 pb-6 border-b border-white/10">
+
+            <span>
+                by
+                <span class="text-cream/70 font-medium">
+                    <?= htmlspecialchars($story['author']) ?>
+                </span>
             </span>
-        </span>
 
-        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+            <span class="w-1 h-1 rounded-full bg-white/20"></span>
 
-        <span>
-            <?= date('j F Y', strtotime($story['created_at'])) ?>
-        </span>
-
-    </div>
-
-    <!-- COVER IMAGE -->
-    <?php if (!empty($story['image'])): ?>
-    <div class="fade-up delay-2 mb-10">
-
-        <div class="rounded-xl overflow-hidden shadow-2xl shadow-black/60 ring-1 ring-white/10 max-w-xs mx-auto">
-
-            <img
-                src="/uploads/<?= htmlspecialchars($story['image']) ?>"
-                alt="<?= htmlspecialchars($story['title']) ?>"
-                class="w-full object-cover"
-            >
+            <span>
+                <?= date('j F Y', strtotime($story['created_at'])) ?>
+            </span>
 
         </div>
 
-    </div>
-    <?php endif; ?>
+        <!-- COVER IMAGE -->
+        <?php if (!empty($story['image'])): ?>
+            <div class="fade-up delay-2 mb-10">
 
-    <!-- STORY CONTENT -->
-    <article class="fade-up delay-3 text-cream/80 text-base leading-4 whitespace-pre-line font-body">
+                <div class="rounded-xl overflow-hidden shadow-2xl shadow-black/60 ring-1 ring-white/10 max-w-xs mx-auto">
 
-        <?= nl2br(htmlspecialchars($currentContent)) ?>
+                    <img
+                        src="/uploads/<?= htmlspecialchars($story['image']) ?>"
+                        alt="<?= htmlspecialchars($story['title']) ?>"
+                        class="w-full object-cover">
 
-    </article>
+                </div>
 
-    <!-- PAGINATION -->
-    <div class="mt-14 flex items-center justify-between border-t border-white/10 pt-8">
+            </div>
+        <?php endif; ?>
 
-        <!-- PREVIOUS -->
-        <div>
-            <?php if($currentPage > 1): ?>
+        <!-- STORY CONTENT -->
+        <article class="fade-up delay-3 text-cream/80 text-base leading-8 font-body text-justify max-w-2xl mx-auto">
 
-                <a
-                    href="?page=<?= $currentPage - 1 ?>"
-                    class="px-5 py-2 rounded-full border border-white/10 text-sm text-cream hover:bg-white/5 transition"
-                >
-                    ← Previous
-                </a>
+            <?php
+            $lines = explode("\n", $currentContent);
+            $paragraphs = [];
+            $currentParagraph = '';
 
-            <?php endif; ?>
+            foreach ($lines as $line) {
+                $line = trim($line);
+
+                if ($line === '') {
+                    // kosong = paragraf baru
+                    if ($currentParagraph !== '') {
+                        $paragraphs[] = $currentParagraph;
+                        $currentParagraph = '';
+                    }
+                } else {
+                    // gabung baris
+                    $currentParagraph .= ($currentParagraph ? ' ' : '') . $line;
+                }
+            }
+
+            // terakhir
+            if ($currentParagraph !== '') {
+                $paragraphs[] = $currentParagraph;
+            }
+
+            // render
+            foreach ($paragraphs as $p) {
+                echo "<p class='mb-5 text-justify indent-8'>" . htmlspecialchars($p) . "</p>";
+            }
+            ?>
+
+        </article>
+
+        <!-- PAGINATION -->
+        <div class="mt-14 grid grid-cols-3 items-center border-t border-white/10 pt-8">
+
+            <!-- PREVIOUS -->
+            <div class="justify-self-start">
+                <?php if ($currentPage > 1): ?>
+                    <a
+                        href="?page=<?= $currentPage - 1 ?>"
+                        class="px-5 py-2 rounded-full border border-white/10 text-sm text-cream hover:bg-white/5 transition">
+                        ← Previous
+                    </a>
+                <?php endif; ?>
+            </div>
+
+            <!-- PAGE INFO (CENTER PERFECT) -->
+            <div class="text-center text-white/40 text-xs tracking-[0.2em] uppercase">
+                Page <?= $currentPage ?> / <?= $totalPages ?>
+            </div>
+
+            <!-- NEXT -->
+            <div class="justify-self-end">
+                <?php if ($currentPage < $totalPages): ?>
+                    <a
+                        href="?page=<?= $currentPage + 1 ?>"
+                        class="px-5 py-2 rounded-full bg-amber text-black text-sm font-medium hover:opacity-90 transition">
+                        Next →
+                    </a>
+                <?php endif; ?>
+            </div>
+
         </div>
 
-        <!-- PAGE INFO -->
-        <div class="text-white/40 text-sm tracking-widest uppercase">
-            Page <?= $currentPage ?> / <?= $totalPages ?>
+        <!-- FOOTER -->
+        <div class="mt-20 text-center">
+            <a href="/"
+                class="inline-flex items-center gap-2 text-sm text-white/60 hover:text-amber transition">
+
+                <span class="text-lg leading-none">←</span>
+                <span>Baca buku lainnya</span>
+            </a>
         </div>
 
-        <!-- NEXT -->
-        <div>
-            <?php if($currentPage < $totalPages): ?>
+    </main>
 
-                <a
-                    href="?page=<?= $currentPage + 1 ?>"
-                    class="px-5 py-2 rounded-full bg-amber text-black text-sm font-medium hover:opacity-90 transition"
-                >
-                    Next →
-                </a>
+    <footer class="border-t border-white/10 px-8 py-6 text-center text-white/30 text-xs">
 
-            <?php endif; ?>
-        </div>
+        © <?= date('Y') ?> Light's on — Read more, feel more.
 
-    </div>
-
-    <!-- FOOTER -->
-    <div class="mt-16 pt-8 border-t border-white/10 flex items-center justify-between">
-
-        <span class="text-white/30 text-xs uppercase tracking-widest">
-            — Tamat —
-        </span>
-
-        <a href="/" class="text-amber text-sm hover:underline">
-            Baca cerita lain →
-        </a>
-
-    </div>
-
-</main>
-
-<footer class="border-t border-white/10 px-8 py-6 text-center text-white/30 text-xs">
-
-    © <?= date('Y') ?> Light's on — Read more, feel more.
-
-</footer>
+    </footer>
 
 </body>
+
 </html>
