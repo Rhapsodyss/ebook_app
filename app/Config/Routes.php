@@ -6,6 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Story::index');
+$routes->get('/about', 'About::index');
 $routes->get('/read/(:num)', 'Story::read/$1');
 $routes->get('/search', 'Story::search');
 

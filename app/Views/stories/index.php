@@ -281,8 +281,19 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 px-8 py-6 text-center text-white/30 text-xs">
-        © <?= date('Y') ?> Light's on — Read more, feel more.
+    <footer class="border-t border-white/10 px-8 py-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-white/30 text-xs text-center md:text-left">
+                © <?= date('Y') ?> Light's on — Read more, feel more.
+            </p>
+            <a href="/about"
+                class="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium tracking-wide text-ink bg-amber rounded-full hover:bg-amber/80 transition">
+                About Us
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
     </footer>
 
     <!-- Slide -->
