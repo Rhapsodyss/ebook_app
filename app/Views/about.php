@@ -163,7 +163,7 @@
                         <div class="text-8xl opacity-30">🐤</div>
                     </div>
                     <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink to-transparent p-6 pt-16">
-                        <h3 class="font-display text-2xl font-bold text-amber">Arjuna<br>Hardy</h3>
+                        <h3 class="font-display text-2xl font-bold text-amber">Arjuna Hardy<br>Alva Rizky</h3>
                         <p class="text-white/50 text-sm mt-1"><?= htmlspecialchars($role4 ?? 'Developer') ?></p>
                     </div>
                 </div>
