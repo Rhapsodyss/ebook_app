@@ -19,14 +19,14 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-dev --optimize-autoloader
 
-      - name: Sync Files via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: LightsOn
+        uses: Rhapsodyss/ebook_app
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-          server-dir: /public_html/ 
+          server-dir: /htdocs/ 
           exclude: |
             **/.git*
             **/node_modules/**
