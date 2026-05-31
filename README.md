@@ -1,69 +1,146 @@
-# CodeIgniter 4 Application Starter
+# 📚 Light's On
 
-## What is CodeIgniter?
+> Aplikasi Web Novel & E-Book Reader yang elegan dengan tampilan klasik dan pengalaman membaca yang nyaman.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+🌐 **Live Demo:** [https://lightson.zya.me/](https://lightson.zya.me/)
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+---
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## 📖 Tentang Project
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+**Light's On** adalah aplikasi web untuk membaca novel dan e-book secara online. Aplikasi ini dirancang dengan estetika klasik yang memadukan nuansa buku fisik dan kemudahan akses digital. Fitur-fitur utama meliputi:
 
-## Installation & updates
+- 📚 **Koleksi Buku Dinamis** - Jelajahi ribuan judul dengan hero slider dan grid responsif
+- 🔍 **Pencarian Real-time** - Cari judul buku dengan instan
+- 📖 **Mode Baca** - Interface nyaman untuk membaca cerita lengkap dengan background dinamis
+- 🌓 **Dark Mode** - Tema gelap untuk kenyamanan mata saat membaca
+- ⚡ **Performa Optimal** - Powered by CodeIgniter 4 dengan optimasi autoloader
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+---
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## 🛠️ Tech Stack
 
-## Setup
+| Kategori | Teknologi |
+|----------|-----------|
+| **Backend Framework** | ![CodeIgniter](https://img.shields.io/badge/CodeIgniter-4.7-FF4329?style=flat-square&logo=codeigniter) |
+| **Language** | ![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php) |
+| **Frontend & Styling** | ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=flat-square&logo=tailwind-css) |
+| **Testing** | ![PHPUnit](https://img.shields.io/badge/PHPUnit-10.5-777BB4?style=flat-square) |
+| **CI/CD** | ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=github-actions) |
+| **Deployment** | ![InfinityFree](https://img.shields.io/badge/InfinityFree-Hosting-blue?style=flat-square) |
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+---
 
-## Important Change with index.php
+## 🏗️ Struktur Project
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+```
+ebook_app/
+├── app/
+│   ├── Config/          # Konfigurasi aplikasi
+│   └── Views/           # Template views
+│       └── stories/     # Views untuk fitur baca
+├── public/              # Assets publik (CSS, JS, uploads)
+├── writable/            # Folder writable (logs, cache, sessions)
+├── tests/               # Unit & session tests
+├── vendor/              # Dependencies
+├── composer.json        # PHP dependencies
+└── .github/workflows/   # CI/CD deployment config
+```
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+---
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## 🚀 Getting Started
 
-## Repository Management
+### Prerequisites
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- PHP >= 8.2
+- Composer
+- Web Server (Apache/Nginx) atau PHP Built-in Server
+- MySQL/MariaDB
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### Installation
 
-## Server Requirements
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/username/ebook_app.git
+   cd ebook_app
+   ```
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+2. **Install dependencies**
+   ```bash
+   composer install
+   ```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+3. **Konfigurasi environment**
+   ```bash
+   cp env .env
+   # Edit file .env sesuai dengan konfigurasi server Anda
+   ```
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+4. **Setup database**
+   - Import file `ebook_db.sql` ke database MySQL Anda
+   - Atur koneksi database di `app/Config/Database.php`
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+5. **Jalankan aplikasi**
+   ```bash
+   php spark serve
+   ```
+   
+   Akses di: `http://localhost:8080`
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+---
+
+## 🧪 Testing
+
+```bash
+composer test
+```
+
+---
+
+## 📝 Dokumentasi
+
+- 📋 **Analisis Sistem** - [`ANALISIS_SISTEM.md`](ANALISIS_SISTEM.md)
+- 📙 **Dokumentasi Teknis** - [`DOKUMENTASI_TEKNIS.md`](DOKUMENTASI_TEKNIS.md)
+- 📘 **Dokumentasi Umum** - [`DOKUMENTASI_UMUM.md`](DOKUMENTASI_UMUM.md)
+- 📗 **Panduan Admin** - [`PANDUAN_PENGGUNAAN_ADMIN.md`](PANDUAN_PENGGUNAAN_ADMIN.md)
+- ❓ **Q&A Reviewer** - [`TANYA_JAWAB_REVIEWER.md`](TANYA_JAWAB_REVIEWER.md)
+
+---
+
+## 🎨 Frontend Technologies
+
+- **Tailwind CSS** - Utility-first CSS framework dengan palette "Ink" (#1A1A1A) & "Cream" (#F5F0E8)
+- **Playfair Display** - Font klasik untuk kesan buku fisik
+- **DM Sans** - Font sans-serif untuk keterbacaan digital
+- **Vanilla JS** - Hero slider dengan transisi fade-in/fade-out
+
+---
+
+## 🔐 Admin Access
+
+Untuk mengakses panel admin, silakan merujuk pada dokumentasi [`PANDUAN_PENGGUNAAN_ADMIN.md`](PANDUAN_PENGGUNAAN_ADMIN.md).
+
+---
+
+## 🤝 Kontribusi
+
+1. Fork repository ini
+2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buka Pull Request
+
+---
+
+## 📄 License
+
+Project ini dilisensikan under MIT License - lihat file [LICENSE](LICENSE) untuk detail.
+
+---
+
+## 👨‍💻 Author
+
+Dibuat dengan ❤️ untuk mata kuliah Praktikum Sistem Multimedia
+
+**[Kunjungi Light's On](https://lightson.zya.me/)** untuk pengalaman membaca yang lebih nyaman.
